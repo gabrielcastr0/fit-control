@@ -3,8 +3,6 @@ import styled from 'styled-components/native';
 import {Button} from 'react-native';
 import {connect} from 'react-redux';
 
-import DefaultButton from '../components/DefaultButton';
-
 const Container = styled.SafeAreaView`
   flex: 1;
   align-items: center;
@@ -33,10 +31,10 @@ const NextBtn = props => {
   //responsável pela função disparada pelo botão
   const nextAction = () => {
     //verifica se algo foi digitado
-    if (!props.navigation.state.params || !props.navigation.state.params.name) {
-      alert('Por favor, insira um nome!');
-      return;
-    }
+    // if (!props.navigation.state.params || !props.navigation.state.params.name) {
+    //   alert('Você precisa de um nome!');
+    //   return;
+    // }
 
     //manda p/ a tela de StarterDias
     props.navigation.navigate('StarterDias');

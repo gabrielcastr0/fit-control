@@ -2,7 +2,7 @@
 const initialState = {
   name: '',
   level: '', //iniciante, intermediário, avançado
-  workoutDays: [], //Dia 1 - 0
+  workoutDays: [], //Dia 0 - 6 (Seg, Ter, Qua, Qui, Sex, Sab, Dom)
   myWorkouts: [],
   lastWorkout: '', //ID
   dailyProgress: ['2019-09-13', '2019-09-12'],

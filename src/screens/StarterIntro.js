@@ -54,7 +54,7 @@ const Page = props => {
           width="100%"
           height="50px"
           bgColor="#0072c0"
-          underlayColor="0b7ac6"
+          underlayColor="#0b7ac6"
           onPress={start}>
           <ButtonText>Iniciar Configuração</ButtonText>
         </DefaultButton>

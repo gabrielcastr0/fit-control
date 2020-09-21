@@ -12,6 +12,8 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case 'SET_NAME':
       return {...state, name: action.payload.name}; //mudando nome do usuário
+    case 'SET_WORKOUTDAYS':
+      return {...state, workoutDays: action.payload.workoutDays}; //mudando dias
   }
 
   return state;

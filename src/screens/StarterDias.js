@@ -45,24 +45,13 @@ const NextBtn = props => {
     }
 
     //manda p/ a tela de StarterDias
-    props.navigation.navigate('StarterLevel');
+    props.navigation.navigate('StarterNivel');
   };
 
   return <Button title="Próximo" onPress={nextAction} />;
 };
 
 const Page = props => {
-  const nextAction = () => {
-    //verifica se foi inserido um nome
-    if (!props.name) {
-      alert('Por favor, insira um nome!');
-      return;
-    }
-
-    //manda p/ a tela de StarterDias
-    props.navigation.navigate('StarterDias');
-  };
-
   //verifica se o dia foi marcado ou não
   const toggleDay = d => {
     let newWorkoutDays = [...props.workoutDays];
@@ -92,7 +81,7 @@ const Page = props => {
         <DefaultButton
           bgColor={props.workoutDays.includes(1) ? '#0072c0' : false}
           underlayColor="#CCC"
-          width={95}
+          width={100}
           style={{marginBottom: 15}}
           onPress={() => toggleDay(1)}>
           <Text
@@ -103,7 +92,7 @@ const Page = props => {
         <DefaultButton
           bgColor={props.workoutDays.includes(2) ? '#0072c0' : false}
           underlayColor="#CCC"
-          width={95}
+          width={100}
           style={{marginBottom: 15}}
           onPress={() => toggleDay(2)}>
           <Text
@@ -114,7 +103,7 @@ const Page = props => {
         <DefaultButton
           bgColor={props.workoutDays.includes(3) ? '#0072c0' : false}
           underlayColor="#CCC"
-          width={95}
+          width={100}
           style={{marginBottom: 15}}
           onPress={() => toggleDay(3)}>
           <Text
@@ -125,7 +114,7 @@ const Page = props => {
         <DefaultButton
           bgColor={props.workoutDays.includes(4) ? '#0072c0' : false}
           underlayColor="#CCC"
-          width={95}
+          width={100}
           style={{marginBottom: 15}}
           onPress={() => toggleDay(4)}>
           <Text
@@ -136,7 +125,7 @@ const Page = props => {
         <DefaultButton
           bgColor={props.workoutDays.includes(5) ? '#0072c0' : false}
           underlayColor="#CCC"
-          width={95}
+          width={100}
           style={{marginBottom: 15}}
           onPress={() => toggleDay(5)}>
           <Text
@@ -147,7 +136,7 @@ const Page = props => {
         <DefaultButton
           bgColor={props.workoutDays.includes(6) ? '#0072c0' : false}
           underlayColor="#CCC"
-          width={95}
+          width={100}
           style={{marginBottom: 15}}
           onPress={() => toggleDay(6)}>
           <Text
@@ -158,7 +147,7 @@ const Page = props => {
         <DefaultButton
           bgColor={props.workoutDays.includes(0) ? '#0072c0' : false}
           underlayColor="#CCC"
-          width={97}
+          width={100}
           style={{marginBottom: 15}}
           onPress={() => toggleDay(0)}>
           <Text

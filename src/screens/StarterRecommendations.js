@@ -22,6 +22,13 @@ const HeaderText = styled.Text`
   margin-bottom: 30px;
 `;
 
+const FooterText = styled.Text`
+  font-size: 17px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 30px;
+`;
+
 const BoldText = styled.Text`
   font-weight: bold;
 `;
@@ -43,6 +50,7 @@ const NextBtn = props => {
   ) {
     btnTitle = 'Concluir';
   }
+
   //responsável pela função disparada pelo botão
   const nextAction = () => {
     //verifica se algo foi digitado
@@ -64,16 +72,15 @@ const NextBtn = props => {
 const Page = props => {
   return (
     <Container>
-      <HeaderText>Opções de treinos pré-criados!</HeaderText>
-      <HeaderText>
-        <BoldText>Você selecionou {props.myWorkouts.length} treinos</BoldText>
-      </HeaderText>
-
+      <HeaderText>Vamos mostrar alguns treinos pré-criados:</HeaderText>
       <WorkoutList
         data={workoutJson}
         renderItem={({item}) => <Workout data={item} />}
         keyExtractor={item => item.id}
       />
+      <FooterText>
+        <BoldText>Você selecionou {props.myWorkouts.length} treinos</BoldText>
+      </FooterText>
     </Container>
   );
 };
@@ -96,9 +103,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return {
-    setLevel: level => dispatch({type: 'SET_LEVEL', payload: {level}}), //setando level
-  };
+  return {};
 };
 
 export default connect(

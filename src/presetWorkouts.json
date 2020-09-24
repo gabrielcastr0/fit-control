@@ -1,24 +1,52 @@
 [
   {
-    "id":"123",
-    "name":"Treino Iniciante A",
-    "exercises":[
-      {"id":1, "name":"Supino Inclinado", "muscle":"chest", "sets":"3", "reps":"10", "load":"20"},
-      {"id":2, "name":"Ex 2", "muscle":"biceps", "sets":"2", "reps":"12", "load":"10"}
+    "id": "123",
+    "name": "Teste 1",
+    "exercises": [
+      {
+        "id": 1,
+        "name": "Supino Inclinado",
+        "muscle": "chest",
+        "sets": "3",
+        "reps": "10",
+        "load": "20"
+      },
+      {
+        "id": 2,
+        "name": "Ex 2",
+        "muscle": "biceps",
+        "sets": "2",
+        "reps": "12",
+        "load": "10"
+      }
     ]
   },
   {
-    "id":"456",
-    "name":"Treino Iniciante B",
-    "exercises":[
-      {"id":1, "name":"Supino Inclinado", "muscle":"chest", "sets":"3", "reps":"10", "load":"20"}
+    "id": "456",
+    "name": "Teste 2",
+    "exercises": [
+      {
+        "id": 1,
+        "name": "Supino Inclinado",
+        "muscle": "chest",
+        "sets": "3",
+        "reps": "10",
+        "load": "20"
+      }
     ]
   },
   {
-    "id":"645",
-    "name":"Treino Iniciante C",
-    "exercises":[
-      {"id":1, "name":"Supino Inclinado", "muscle":"chest", "sets":"3", "reps":"10", "load":"20"}
+    "id": "645",
+    "name": "Teste 3",
+    "exercises": [
+      {
+        "id": 1,
+        "name": "Supino Inclinado",
+        "muscle": "chest",
+        "sets": "3",
+        "reps": "10",
+        "load": "20"
+      }
     ]
   }
 ]

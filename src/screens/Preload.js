@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 //criando preload
 const Preload = props => {
-  if (true) {
+  if (!props.name) {
     //caso não tiver nome de usuário, manda para StarterStack
     props.navigation.dispatch(
       StackActions.reset({

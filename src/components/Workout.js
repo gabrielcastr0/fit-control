@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components/native';
 
 import useMuscleImage from './useMuscleImage';
@@ -57,6 +57,9 @@ const WorkoutButtonImg = styled.Image`
 `;
 
 export default props => {
+  //criando uma state
+  const [included, setIncluded] = useState(false);
+
   const muscleGroups = []; //array para armazenar a lista de muscles
 
   //faz a adição dos muscles em uma lista
@@ -65,6 +68,12 @@ export default props => {
       muscleGroups.push(props.data.exercises[i].muscle);
     }
   }
+
+  //responsável por setar lista como marcada ou não
+  const addWorkout = () => {
+    setIncluded(!included);
+    props.addAction();
+  };
 
   return (
     <Workout>
@@ -79,8 +88,14 @@ export default props => {
         </MuscleScroll>
       </WorkoutInfo>
       <WorkoutActions>
-        <WorkoutButton>
-          <WorkoutButtonImg source={require('../assets/add.png')} />
+        <WorkoutButton onPress={() => addWorkout()} underlayColor="transparent">
+          <WorkoutButtonImg
+            source={
+              included
+                ? require('../assets/check-black.png')
+                : require('../assets/add.png')
+            }
+          />
         </WorkoutButton>
       </WorkoutActions>
     </Workout>

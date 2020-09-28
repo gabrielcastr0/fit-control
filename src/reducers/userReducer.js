@@ -9,13 +9,27 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
+  let myWorkouts = [...state.myWorkouts];
+
   switch (action.type) {
-    case 'SET_NAME':
-      return {...state, name: action.payload.name}; //mudando nome do usuário
-    case 'SET_WORKOUTDAYS':
-      return {...state, workoutDays: action.payload.workoutDays}; //mudando dias
-    case 'SET_LEVEL':
+    case 'SET_NAME': //setando nome do usuário
+      return {...state, name: action.payload.name};
+
+    case 'SET_WORKOUTDAYS': //setatndo dias
+      return {...state, workoutDays: action.payload.workoutDays};
+
+    case 'SET_LEVEL': //setando level
       return {...state, level: action.payload.level};
+
+    case 'ADD_WORKOUT': //adicionando workout
+      if (myWorkouts.findIndex(i => i.id === action.payload.workout.id) < 0) {
+        myWorkouts.push(action.payload.workout);
+      }
+      return {...state, myWorkouts};
+
+    case 'DEL_WORKOUT': //deletando workout
+      myWorkouts = myWorkouts.filter(i => i.id !== action.payload.workout.id);
+      return {...state, myWorkouts};
   }
 
   return state;

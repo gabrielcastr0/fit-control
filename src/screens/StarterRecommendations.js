@@ -1,8 +1,10 @@
 import React, {useEffect} from 'react';
 import styled from 'styled-components/native';
-import {Button, Text} from 'react-native';
+import {Button} from 'react-native';
 import {connect} from 'react-redux';
+import {StackActions, NavigationActions} from 'react-navigation';
 
+import {addWorkout, delWorkout} from '../actions/userActions';
 import workoutJson from '../presetWorkouts.json';
 import Workout from '../components/Workout';
 
@@ -38,48 +40,59 @@ const WorkoutList = styled.FlatList`
 `;
 
 const NextBtn = props => {
-  //responsável por mandar um novo myWorkouts caso mudar
-  // useEffect(() => {
-  //   props.navigation.setParams({myWorkouts: props.myWorkouts});
-  // }, [props.myWorkouts, props.navigation]);
-
   let btnTitle = 'Ignorar';
   if (
     props.navigation.state.params &&
-    props.navigation.state.params.myWorkouts.length > 0
+    props.navigation.state.params.hasWorkout
   ) {
     btnTitle = 'Concluir';
   }
 
   //responsável pela função disparada pelo botão
   const nextAction = () => {
-    //verifica se algo foi digitado
-    if (
-      !props.navigation.state.params ||
-      !props.navigation.state.params.level
-    ) {
-      alert('Você precisa escolher uma opção!');
-      return;
-    }
-
-    //manda p/ a tela de StarterRecommendations
-    props.navigation.navigate('StarterRecommendations');
+    props.navigation.dispatch(
+      StackActions.reset({
+        index: 0,
+        actions: [NavigationActions.navigate({routeName: 'AppTab'})],
+      }),
+    );
   };
 
   return <Button title={btnTitle} onPress={nextAction} />;
 };
 
 const Page = props => {
+  //verifica se o Workout já exista na lista de Workouts, se sim, irá remover, se não, irá adicionar.
+  const addWorkout = item => {
+    if (props.myWorkouts.findIndex(i => i.id === item.id) < 0) {
+      props.addWorkout(item);
+    } else {
+      props.delWorkout(item);
+    }
+  };
+
+  //responsável por mandar um novo myWorkouts caso mudar
+  useEffect(() => {
+    if (props.myWorkouts.length > 0) {
+      props.navigation.setParams({hasWorkout: true});
+    } else {
+      props.navigation.setParams({hasWorkout: false});
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.myWorkouts]);
+
   return (
     <Container>
       <HeaderText>Vamos mostrar alguns treinos pré-criados:</HeaderText>
       <WorkoutList
         data={workoutJson}
-        renderItem={({item}) => <Workout data={item} />}
+        renderItem={({item}) => (
+          <Workout addAction={() => addWorkout(item)} data={item} />
+        )}
         keyExtractor={item => item.id}
       />
       <FooterText>
-        <BoldText>Você selecionou {props.myWorkouts.length} treinos</BoldText>
+        <BoldText>Você selecionou {props.myWorkouts.length} treino(s)</BoldText>
       </FooterText>
     </Container>
   );
@@ -103,7 +116,10 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    addWorkout: workout => addWorkout(workout, dispatch),
+    delWorkout: workout => delWorkout(workout, dispatch),
+  };
 };
 
 export default connect(

@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import styled from 'styled-components/native';
 import {connect} from 'react-redux';
@@ -10,12 +11,63 @@ const Container = styled.SafeAreaView`
   align-items: center;
 `;
 
+const Legend = styled.View`
+  width: 90%;
+  align-items: flex-start;
+  margin-top: 30px;
+`;
+
+const LegendText = styled.Text`
+  color: #555;
+`;
+
+const LegendItem = styled.View`
+  flex-direction: row;
+  align-items: center;
+  margin-top: 5px;
+`;
+
+const LegendBox = styled.View`
+  width: 15px;
+  height: 15px;
+  background-color: #ccc;
+  margin-right: 5px;
+`;
+
 const Page = props => {
   return (
     <Container>
       <HomeMonthScroll />
       <HomeDaysScroll />
       <HomeDayStatus />
+
+      <Legend>
+        <LegendText>Legenda:</LegendText>
+        <LegendItem>
+          <LegendBox style={{backgroundColor: '#b5eeff'}} />
+          <LegendText>Hoje</LegendText>
+        </LegendItem>
+
+        <LegendItem>
+          <LegendBox style={{backgroundColor: '#b5ffb8'}} />
+          <LegendText>Treino feito</LegendText>
+        </LegendItem>
+
+        <LegendItem>
+          <LegendBox style={{backgroundColor: '#ffb5b5'}} />
+          <LegendText>Treino perdido</LegendText>
+        </LegendItem>
+
+        <LegendItem>
+          <LegendBox style={{backgroundColor: '#f4f4aa'}} />
+          <LegendText>Dia de descanso</LegendText>
+        </LegendItem>
+
+        <LegendItem>
+          <LegendBox style={{backgroundColor: '#f4f4f4'}} />
+          <LegendText>Dia futuro</LegendText>
+        </LegendItem>
+      </Legend>
     </Container>
   );
 };

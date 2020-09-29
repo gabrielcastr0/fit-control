@@ -2,10 +2,22 @@ import React from 'react';
 import styled from 'styled-components/native';
 import {connect} from 'react-redux';
 
-const Container = styled.SafeAreaView``;
+import HomeMonthScroll from '../components/HomeMonthScroll';
+import HomeDaysScroll from '../components/HomeDaysScroll';
+import HomeDayStatus from '../components/HomeDayStatus';
+
+const Container = styled.SafeAreaView`
+  align-items: center;
+`;
 
 const Page = props => {
-  return <Container />;
+  return (
+    <Container>
+      <HomeMonthScroll />
+      <HomeDaysScroll />
+      <HomeDayStatus />
+    </Container>
+  );
 };
 
 //configurando os botões do header da tela

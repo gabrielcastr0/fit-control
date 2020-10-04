@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import {connect} from 'react-redux';
 
@@ -35,9 +35,16 @@ const LegendBox = styled.View`
 `;
 
 const Page = props => {
+  let today = new Date();
+  const [selectMonth, setSelectedMonth] = useState(today.getMonth()); //pegando mês atual como useState inicial.
+
   return (
     <Container>
-      <HomeMonthScroll />
+      <HomeMonthScroll
+        selectMonth={selectMonth}
+        setSelectedMonth={setSelectedMonth}
+      />
+
       <HomeDaysScroll />
       <HomeDayStatus />
 

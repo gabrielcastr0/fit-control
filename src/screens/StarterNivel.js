@@ -50,28 +50,28 @@ const NextBtn = props => {
 };
 
 const Page = props => {
-  let funnyPhrase = '';
+  let count = '';
   switch (props.workoutDays.length) {
     case 1:
-      funnyPhrase = 'Só um dia não vai adiantar muito!';
+      count = 1;
       break;
     case 2:
-      funnyPhrase = '2 dias ainda é pouco, mas já ajuda!';
+      count = 2;
       break;
     case 3:
-      funnyPhrase = '3 dias já é um bom começo!';
+      count = 3;
       break;
     case 4:
-      funnyPhrase = 'Boa, com 4 dias já dá pra brincar!';
+      count = 4;
       break;
     case 5:
-      funnyPhrase = 'Uou, 5 dias é perfeito!';
+      count = 5;
       break;
     case 6:
-      funnyPhrase = 'Boa sorte na carreira de BodyBuilder!';
+      count = 6;
       break;
     case 7:
-      funnyPhrase = 'Todos os dias?! Super Xandão aprova!';
+      count = 7;
       break;
   }
 
@@ -83,7 +83,7 @@ const Page = props => {
 
   return (
     <Container>
-      <HeaderText>{funnyPhrase}</HeaderText>
+      <HeaderText>Você escolheu treinar {count} dias da semana!</HeaderText>
       <HeaderText>
         <BoldText>Qual é o seu nível atualmente?</BoldText>
       </HeaderText>
@@ -96,7 +96,7 @@ const Page = props => {
           style={{marginBottom: 15}}
           onPress={() => setMyLevel('iniciante')}>
           <Text style={{color: props.level == 'iniciante' ? '#fff' : '#000'}}>
-            Iniciante (Frango)
+            Iniciante
           </Text>
         </DefaultButton>
         <DefaultButton
@@ -107,7 +107,7 @@ const Page = props => {
           onPress={() => setMyLevel('intermediário')}>
           <Text
             style={{color: props.level == 'intermediário' ? '#fff' : '#000'}}>
-            Intermediário (Semi-Maromba)
+            Intermediário
           </Text>
         </DefaultButton>
         <DefaultButton
@@ -117,7 +117,7 @@ const Page = props => {
           style={{marginBottom: 15}}
           onPress={() => setMyLevel('avançado')}>
           <Text style={{color: props.level == 'avançado' ? '#fff' : '#000'}}>
-            Avançado (Super Xandão)
+            Avançado
           </Text>
         </DefaultButton>
       </LevelArea>

@@ -2,7 +2,10 @@ import React, {useState, useEffect, useRef} from 'react';
 import {Dimensions} from 'react-native';
 import styled from 'styled-components/native';
 
-const MonthScroll = styled.ScrollView``;
+const MonthScroll = styled.ScrollView`
+  width: 100%;
+  height: 60px;
+`;
 
 const MonthButton = styled.TouchableHighlight`
   width: ${props => props.width};
@@ -42,12 +45,29 @@ const thirdW = screenWidth / 3;
 export default props => {
   const MonthRef = useRef();
 
+  const [selectedMonth, setSelectedMonth] = useState(props.selectedMonth);
+
+  //responsável por pegar a pos. do mês atual
+  const handleScrollEnd = e => {
+    let posX = e.nativeEvent.contentOffset.x;
+    let targetMonth = Math.round(posX / thirdW);
+    setSelectedMonth(targetMonth);
+  };
+
+  useEffect(() => {
+    props.setSelectedMonth(selectedMonth);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedMonth]);
+
   return (
     <MonthScroll
       horizontal={true}
       ref={MonthRef}
       showsHorizontalScrollIndicator={false}
-      decelerationRate="fast">
+      decelerationRate="fast"
+      snapToInterval={thirdW}
+      contentContainerStyle={{paddingLeft: thirdW, paddingRight: thirdW}}
+      onMomentumScrollEnd={handleScrollEnd}>
       {months.map((m, k) => (
         <MonthButton key={k} width={thirdW}>
           <MonthItem>

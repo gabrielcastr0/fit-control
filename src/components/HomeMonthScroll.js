@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useState, useEffect, useRef} from 'react';
 import {Dimensions} from 'react-native';
 import styled from 'styled-components/native';
@@ -90,7 +91,7 @@ export default props => {
           underlayColor="transparent">
           <MonthItem
             style={
-              k == selectedMonth
+              k === selectedMonth
                 ? {backgroundColor: '#ccc', width: '100%', height: 40}
                 : {}
             }>

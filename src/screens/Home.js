@@ -39,6 +39,7 @@ const LegendBox = styled.View`
 const Page = props => {
   let today = new Date();
   const [selectedMonth, setSelectedMonth] = useState(today.getMonth()); //pegando mês atual como useState inicial.
+  const [selectedDay, setSelectedDay] = useState(today.getDate()); //pegando dia atual
 
   return (
     <Container>
@@ -47,7 +48,13 @@ const Page = props => {
         setSelectedMonth={setSelectedMonth}
       />
 
-      <HomeDaysScroll />
+      <HomeDaysScroll
+        selectedMonth={selectedMonth}
+        selectedDay={selectedDay}
+        setSelectedDay={setSelectedDay}
+        dailyProgress={props.dailyProgress}
+        workoutDays={props.workoutDays}
+      />
       <HomeDayStatus />
 
       <Text>Mês: {selectedMonth}</Text>
@@ -119,7 +126,10 @@ Page.navigationOptions = ({navigation}) => {
 };
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    dailyProgress: state.userReducers.dailyProgress,
+    workoutDays: state.userReducers.workoutDays,
+  };
 };
 
 const mapDispatchToProps = dispatch => {

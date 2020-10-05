@@ -54,10 +54,24 @@ export default props => {
     setSelectedMonth(targetMonth);
   };
 
+  //responsável por fazer o scroll até o mês referente a pos.
+  const scrollToMonth = m => {
+    let posX = m * thirdW;
+    MonthRef.current.scrollTo({x: posX, y: 0, animated: true});
+  };
+
   useEffect(() => {
     props.setSelectedMonth(selectedMonth);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedMonth]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      scrollToMonth(selectedMonth);
+    }, 10);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.selectedMonth]);
 
   return (
     <MonthScroll
@@ -69,8 +83,17 @@ export default props => {
       contentContainerStyle={{paddingLeft: thirdW, paddingRight: thirdW}}
       onMomentumScrollEnd={handleScrollEnd}>
       {months.map((m, k) => (
-        <MonthButton key={k} width={thirdW}>
-          <MonthItem>
+        <MonthButton
+          key={k}
+          width={thirdW}
+          onPress={() => setSelectedMonth(k)}
+          underlayColor="transparent">
+          <MonthItem
+            style={
+              k == selectedMonth
+                ? {backgroundColor: '#ccc', width: '100%', height: 40}
+                : {}
+            }>
             <MonthText>{m}</MonthText>
           </MonthItem>
         </MonthButton>

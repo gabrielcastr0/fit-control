@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState, useEffect, useRef} from 'react';
-import {Dimensions} from 'react-native';
+import {Dimensions, Text} from 'react-native';
 import styled from 'styled-components/native';
 
 const DaysScroll = styled.ScrollView`
@@ -8,26 +8,13 @@ const DaysScroll = styled.ScrollView`
   height: 50px;
 `;
 
-const MonthButton = styled.TouchableHighlight`
-  width: ${props => props.width};
-  justify-content: center;
-  align-items: center;
-`;
-
-const MonthItem = styled.View`
-  width: 90%;
-  height: 30px;
-  background-color: #eee;
-  border-radius: 10px;
-  justify-content: center;
-  align-items: center;
-`;
-
-const MonthText = styled.Text``;
-
 const screenWidth = Math.round(Dimensions.get('window').width);
 const dayW = Math.round(screenWidth / 9);
 let offsetW = Math.round((screenWidth - dayW) / 2);
+
+const Day = props => {
+  return <Text>{props.day}</Text>;
+};
 
 export default props => {
   const DayRef = useRef();
@@ -64,6 +51,19 @@ export default props => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.selectedMonth]);
 
+  let days = [];
+
+  //pegando a quantidade de dias do mês atual
+  let daysInMonth = new Date(
+    new Date().getFullYear(),
+    props.selectedMonth + 1,
+    0,
+  ).getDate();
+
+  for (let i = 1; i <= daysInMonth; i++) {
+    days.push(i);
+  }
+
   return (
     <DaysScroll
       horizontal={true}
@@ -73,21 +73,15 @@ export default props => {
       snapToInterval={dayW}
       contentContainerStyle={{paddingLeft: offsetW, paddingRight: offsetW}}
       onMomentumScrollEnd={handleScrollEnd}>
-      {months.map((m, k) => (
-        <MonthButton
+      {days.map((d, k) => (
+        <Day
           key={k}
-          width={thirdW}
-          onPress={() => setSelectedMonth(k)}
-          underlayColor="transparent">
-          <MonthItem
-            style={
-              k === selectedMonth
-                ? {backgroundColor: '#ccc', width: '100%', height: 40}
-                : {}
-            }>
-            <MonthText>{m}</MonthText>
-          </MonthItem>
-        </MonthButton>
+          day={d}
+          month={props.selectedMonth}
+          dailyProgress={props.dailyProgress}
+          workoutDays={props.workoutDays}
+          onPress={() => scrollToDay(d)}
+        />
       ))}
     </DaysScroll>
   );

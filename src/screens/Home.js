@@ -127,8 +127,8 @@ Page.navigationOptions = ({navigation}) => {
 
 const mapStateToProps = state => {
   return {
-    dailyProgress: state.userReducers.dailyProgress,
-    workoutDays: state.userReducers.workoutDays,
+    dailyProgress: state.userReducer.dailyProgress,
+    workoutDays: state.userReducer.workoutDays,
   };
 };
 

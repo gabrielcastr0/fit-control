@@ -55,7 +55,16 @@ const Page = props => {
         dailyProgress={props.dailyProgress}
         workoutDays={props.workoutDays}
       />
-      <HomeDayStatus />
+      <HomeDayStatus
+        selectedMonth={selectedMonth}
+        selectedDay={selectedDay}
+        setSelectedDay={setSelectedDay}
+        dailyProgress={props.dailyProgress}
+        workoutDays={props.workoutDays}
+        addProgress={props.addProgress}
+        delProgress={props.delProgress}
+        goToWorkout={() => props.navigation.navigate('WorkoutStack')}
+      />
 
       <Text>Mês: {selectedMonth}</Text>
       <Text>Dia: {selectedDay}</Text>
@@ -134,7 +143,10 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    addProgress: date => dispatch({type: 'ADD_PROGRESS', payload: {date}}),
+    delProgress: date => dispatch({type: 'DEL_PROGRESS', payload: {date}}),
+  };
 };
 
 export default connect(

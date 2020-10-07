@@ -52,6 +52,24 @@ const LevelItem = styled.TouchableHighlight`
 const LevelItemText = styled.Text``;
 
 const Page = props => {
+  const toggleWorkoutDay = d => {
+    let newWorkoutDays = [...props.workoutDays];
+    if (newWorkoutDays.includes(d)) {
+      if (newWorkoutDays.length === 1) {
+        // eslint-disable-next-line no-alert
+        alert(
+          'Não é possível remover esse dia, pois é o único que você treina.',
+        );
+        return;
+      }
+      newWorkoutDays = newWorkoutDays.filter(i => i !== d);
+    } else {
+      newWorkoutDays.push(d);
+    }
+
+    props.setWorkoutDays(newWorkoutDays);
+  };
+
   return (
     <Container>
       <Label>Seu nome completo: </Label>
@@ -59,46 +77,87 @@ const Page = props => {
 
       <Label>Dias em que você treina: </Label>
       <ListArea>
-        <DayItem>
+        <DayItem
+          style={
+            props.workoutDays.includes(1) ? {backgroundColor: '#ff0000'} : {}
+          }
+          onPress={() => toggleWorkoutDay(1)}>
           <DayItemText>S</DayItemText>
         </DayItem>
 
-        <DayItem>
+        <DayItem
+          style={
+            props.workoutDays.includes(2) ? {backgroundColor: '#ff0000'} : {}
+          }
+          onPress={() => toggleWorkoutDay(2)}>
           <DayItemText>T</DayItemText>
         </DayItem>
 
-        <DayItem>
+        <DayItem
+          style={
+            props.workoutDays.includes(3) ? {backgroundColor: '#ff0000'} : {}
+          }
+          onPress={() => toggleWorkoutDay(3)}>
           <DayItemText>Q</DayItemText>
         </DayItem>
 
-        <DayItem>
+        <DayItem
+          style={
+            props.workoutDays.includes(4) ? {backgroundColor: '#ff0000'} : {}
+          }
+          onPress={() => toggleWorkoutDay(4)}>
           <DayItemText>Q</DayItemText>
         </DayItem>
 
-        <DayItem>
+        <DayItem
+          style={
+            props.workoutDays.includes(5) ? {backgroundColor: '#ff0000'} : {}
+          }
+          onPress={() => toggleWorkoutDay(5)}>
           <DayItemText>S</DayItemText>
         </DayItem>
 
-        <DayItem>
+        <DayItem
+          style={
+            props.workoutDays.includes(6) ? {backgroundColor: '#ff0000'} : {}
+          }
+          onPress={() => toggleWorkoutDay(6)}>
           <DayItemText>S</DayItemText>
         </DayItem>
 
-        <DayItem>
+        <DayItem
+          style={
+            props.workoutDays.includes(0) ? {backgroundColor: '#ff0000'} : {}
+          }
+          onPress={() => toggleWorkoutDay(0)}>
           <DayItemText>D</DayItemText>
         </DayItem>
       </ListArea>
 
       <Label>Seu nível: </Label>
       <ListArea>
-        <LevelItem>
+        <LevelItem
+          style={
+            props.level === 'iniciante' ? {backgroundColor: '#ff0000'} : {}
+          }
+          onPress={() => props.setLevel('iniciante')}
+          underlayColor="transparent">
           <LevelItemText>Iniciante</LevelItemText>
         </LevelItem>
 
-        <LevelItem>
+        <LevelItem
+          style={
+            props.level === 'intermediário' ? {backgroundColor: '#ff0000'} : {}
+          }
+          onPress={() => props.setLevel('intermediário')}
+          underlayColor="transparent">
           <LevelItemText>Intermediário</LevelItemText>
         </LevelItem>
 
-        <LevelItem>
+        <LevelItem
+          style={props.level === 'avançado' ? {backgroundColor: '#ff0000'} : {}}
+          onPress={() => props.setLevel('avançado')}
+          underlayColor="transparent">
           <LevelItemText>Avançado</LevelItemText>
         </LevelItem>
       </ListArea>

@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components/native';
 
 import DefaultButton from '../components/DefaultButton';
@@ -96,6 +96,36 @@ export default props => {
     props.delProgress(dFormated);
   };
 
+  const [timeLeft, setTimeLeft] = useState('');
+
+  useEffect(() => {
+    const timerFunction = () => {
+      let now = Date.now();
+      let endToday = new Date();
+      endToday.setHours(23);
+      endToday.setMinutes(59);
+      endToday.setSeconds(59);
+      endToday = endToday.getTime();
+
+      let diff = endToday - now;
+
+      let h = Math.floor(diff / (1000 * 60 * 60)); //pegando hora
+      let m = Math.floor(diff / (1000 * 60) - h * 60); //pegando minutos
+      let s = Math.floor(diff / 1000 - m * 60 - h * 60 * 60); //pegando segundos
+
+      h = h < 10 ? '0' + h : h;
+      m = m < 10 ? '0' + m : m;
+      s = s < 10 ? '0' + s : s;
+
+      setTimeLeft(`${h}h ${m}m ${s}s`);
+    };
+
+    let timer = setInterval(timerFunction, 1000);
+    timerFunction();
+
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <>
       <BalloonTriangle />
@@ -150,7 +180,7 @@ export default props => {
               <Strong>Hoje tem treino!</Strong>
             </BalloonBigText>
 
-            <BalloonText>Você tem ... para treinar</BalloonText>
+            <BalloonText>Você tem {timeLeft} para treinar</BalloonText>
 
             <DefaultButton
               bgColor="#4ac34e"

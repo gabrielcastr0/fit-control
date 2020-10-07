@@ -66,9 +66,6 @@ const Page = props => {
         goToWorkout={() => props.navigation.navigate('WorkoutStack')}
       />
 
-      <Text>Mês: {selectedMonth}</Text>
-      <Text>Dia: {selectedDay}</Text>
-
       <Legend>
         <LegendText>Legenda:</LegendText>
         <LegendItem>

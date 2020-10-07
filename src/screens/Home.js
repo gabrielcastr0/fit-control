@@ -3,8 +3,6 @@ import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import {connect} from 'react-redux';
 
-import {Text} from 'react-native';
-
 import HomeMonthScroll from '../components/HomeMonthScroll';
 import HomeDaysScroll from '../components/HomeDaysScroll';
 import HomeDayStatus from '../components/HomeDayStatus';
@@ -117,7 +115,7 @@ Page.navigationOptions = ({navigation}) => {
     };
 
     return (
-      <ConfigButtonArea onPress={btnAction}>
+      <ConfigButtonArea onPress={btnAction} underlayColor="transparent">
         <ConfigButtonImage source={require('../assets/config.png')} />
       </ConfigButtonArea>
     );

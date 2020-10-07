@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components/native';
 
@@ -24,10 +25,21 @@ const BalloonArea = styled.View`
 
 const BalloonBigText = styled.Text`
   font-size: 15px;
+  align-self: center;
 `;
 
 const ButtonText = styled.Text`
   color: #fff;
+  font-weight: bold;
+`;
+
+const BalloonText = styled.Text`
+  font-size: 13px;
+  align-self: center;
+  margin-top: 10px;
+`;
+
+const Strong = styled.Text`
   font-weight: bold;
 `;
 
@@ -58,7 +70,7 @@ export default props => {
   let isFuture = false;
   let isDone = false;
 
-  //verificando a situação do dia (dia de descanso, dia futuro, feito/não feito)
+  //verificando a situação do dia (dia de descanso, dia futuro, treino feito/treino perdido)
   if (!props.workoutDays.includes(thisDate.getDay())) {
     dayOff = true;
   } else if (thisDate.getTime() > today.getTime()) {
@@ -71,30 +83,81 @@ export default props => {
     }
   }
 
-  //verificando se é hoje
+  //verificando se o dia de treino é hoje
   if (thisDate.getTime() === today.getTime()) {
     isToday = true;
   }
+
+  const setDone = () => {
+    props.addProgress(dFormated);
+  };
+
+  const setUnDone = () => {
+    props.delProgress(dFormated);
+  };
 
   return (
     <>
       <BalloonTriangle />
       <BalloonArea>
-        {dayOff && <BalloonBigText>Dia de descanso</BalloonBigText>}
-        {isFuture && <BalloonBigText>Dia futuro</BalloonBigText>}
+        {dayOff && (
+          <BalloonBigText>
+            <Strong>Dia de descanso</Strong>
+          </BalloonBigText>
+        )}
+
+        {isFuture && (
+          <BalloonBigText>
+            <Strong>Dia futuro</Strong>
+          </BalloonBigText>
+        )}
+
         {!dayOff && !isFuture && isDone && (
           <>
-            <BalloonBigText>Parabéns, treino feito!</BalloonBigText>
-            <DefaultButton>
+            <BalloonBigText>
+              <Strong>Parabéns, treino feito!</Strong>
+            </BalloonBigText>
+
+            <DefaultButton
+              bgColor="#4ac34e"
+              style={{marginTop: 10}}
+              onPress={setUnDone}
+              underlayColor="#4ac34e">
               <ButtonText>Desmarcar</ButtonText>
             </DefaultButton>
           </>
         )}
+
         {!dayOff && !isFuture && !isDone && !isToday && (
           <>
-            <BalloonBigText>Oh, treino perdido!</BalloonBigText>
-            <DefaultButton>
+            <BalloonBigText>
+              <Strong>Oh, treino perdido!</Strong>
+            </BalloonBigText>
+
+            <DefaultButton
+              bgColor="#4ac34e"
+              style={{marginTop: 10}}
+              onPress={setDone}
+              underlayColor="#4ac34e">
               <ButtonText>Marcar</ButtonText>
+            </DefaultButton>
+          </>
+        )}
+
+        {!dayOff && !isFuture && !isDone && isToday && (
+          <>
+            <BalloonBigText>
+              <Strong>Hoje tem treino!</Strong>
+            </BalloonBigText>
+
+            <BalloonText>Você tem ... para treinar</BalloonText>
+
+            <DefaultButton
+              bgColor="#4ac34e"
+              style={{marginTop: 10}}
+              onPress={props.goToWorkout}
+              underlayColor="#4ac34e">
+              <ButtonText>Iniciar treino</ButtonText>
             </DefaultButton>
           </>
         )}

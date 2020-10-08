@@ -69,15 +69,21 @@ export default props => {
     }
   }
 
-  //responsável por setar lista como marcada ou não
+  //responsável por setar lista como marcada ou não / adicionar
   const addWorkout = () => {
     setIncluded(!included);
     props.addAction();
   };
 
-  const editWorkout = () => {};
+  //responasável por editar
+  const editWorkout = () => {
+    props.editAction();
+  };
 
-  const delWorkout = () => {};
+  //responsável por deletar
+  const delWorkout = () => {
+    props.delAction();
+  };
 
   return (
     <Workout>

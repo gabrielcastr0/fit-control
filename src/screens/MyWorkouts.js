@@ -15,12 +15,21 @@ const WorkoutList = styled.FlatList`
 `;
 
 const Page = props => {
+  //responsável por mandar p/ tela de edição de Workout
+  const editWorkout = workout => {
+    props.navigation.navigate('EditWorkout', {workout});
+  };
+
   return (
     <Container>
       <WorkoutList
         data={props.myWorkouts}
         renderItem={({item}) => (
-          <Workout data={item} editAction={() => {}} delAction={() => {}} />
+          <Workout
+            data={item}
+            editAction={() => editWorkout(item)}
+            delAction={() => props.delWorkout(item)}
+          />
         )}
       />
     </Container>
@@ -41,17 +50,21 @@ Page.navigationOptions = ({navigation}) => {
     height: 25px;
   `;
 
-  const AddWorkoutButton = () => {
+  const AddWorkoutButton = ({onPress}) => {
     return (
-      <ButtonArea>
+      <ButtonArea onPress={onPress} underlayColor="transparent">
         <ButtonImage source={require('../assets/add.png')} />
       </ButtonArea>
     );
   };
 
+  const btnAction = () => {
+    navigation.navigate('EditWorkout');
+  };
+
   return {
     title: 'Meus Treinos',
-    headerRight: <AddWorkoutButton />,
+    headerRight: <AddWorkoutButton onPress={btnAction} />,
     headerRightContainerStyle: {
       marginRight: 10,
     },
@@ -67,7 +80,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   //responsável por alterar os dados
-  return {};
+  return {
+    delWorkout: workout => dispatch({type: 'DEL_WORKOUT', payload: {workout}}),
+  };
 };
 
 export default connect(

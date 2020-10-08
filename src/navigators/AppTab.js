@@ -5,13 +5,13 @@ import CustomTabBar from '../components/CustomTabBar';
 
 import HomeStack from './HomeStack';
 //import WorkoutStack from './WorkoutStack';
-//import MyWorkoutsStack from './MyWorkoutStack';
+import MyWorkoutsStack from './MyWorkoutsStack';
 
 export default createBottomTabNavigator(
   {
     HomeStack,
     // WorkoutStack,
-    // MyWorkoutsStack,
+    MyWorkoutsStack,
   },
   {
     //criando TabBar customizada

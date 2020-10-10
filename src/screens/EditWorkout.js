@@ -4,6 +4,9 @@ import styled from 'styled-components/native';
 import {connect} from 'react-redux';
 import Workout from '../components/Workout';
 
+import DefaultButton from '../components/DefaultButton';
+import ExercisesItemEdit from '../components/ExercisesItemEdit';
+
 const Container = styled.SafeAreaView`
   flex: 1;
   margin: 20px;
@@ -18,6 +21,21 @@ const NameInput = styled.TextInput`
   padding: 10px;
 `;
 
+const ButtonText = styled.Text``;
+
+const ExercisesArea = styled.View`
+  flex: 1;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top-width: 1px;
+  border-top-color: #ccc;
+`;
+
+const ExercisesList = styled.FlatList`
+  flex: 1px;
+  padding-top: 20px;
+`;
+
 const Page = props => {
   let workout =
     props.navigation.state.params && props.navigation.state.params.workout
@@ -27,6 +45,8 @@ const Page = props => {
   const [id, setId] = useState(workout ? workout.id : '');
   const [name, setName] = useState(workout ? workout.name : '');
 
+  const [exercises, setExercises] = useState(workout ? workout.exercises : []);
+
   return (
     <Container>
       <NameInput
@@ -34,6 +54,17 @@ const Page = props => {
         onChangeText={e => setName(e)}
         placeholder="Digite o nome do treino"
       />
+      <ExercisesArea>
+        <DefaultButton bgColor="#4ac3ae">
+          <ButtonText>Adicionar Exercício</ButtonText>
+        </DefaultButton>
+
+        <ExercisesList
+          data={exercises}
+          renderItem={({item}) => <ExercisesItemEdit data={item} />}
+          keyExtractor={item => item.name}
+        />
+      </ExercisesArea>
     </Container>
   );
 };

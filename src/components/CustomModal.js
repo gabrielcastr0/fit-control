@@ -10,7 +10,7 @@ const ModalBoxArea = styled.KeyboardAvoidingView`
 `;
 
 const ModalBox = styled.View`
-  width: 90px;
+  width: 90%;
   padding: 20px;
   background-color: #fff;
 `;

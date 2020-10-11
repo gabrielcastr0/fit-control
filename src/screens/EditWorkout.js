@@ -37,6 +37,39 @@ const ExercisesList = styled.FlatList`
   padding-top: 20px;
 `;
 
+const ModalLabel = styled.Text`
+  font-size: 15px;
+  font-weight: bold;
+  margin-top: 10px;
+`;
+
+const ModalMuscles = styled.ScrollView``;
+
+const ModalInput = styled.TextInput`
+  width: 100%;
+  font-size: 14px;
+  color: #333;
+  height: 40px;
+  border-bottom-width: 1px;
+  border-bottom-color: #ccc;
+`;
+
+const ModalMuscle = styled.TouchableHighlight`
+  width: 50px;
+  height: 50px;
+  background-color: #eee;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+  opacity: ${props => props.opacity};
+`;
+
+const ModalMuscleImg = styled.Image`
+  width: 35px;
+  height: 35px;
+`;
+
 const Page = props => {
   let workout =
     props.navigation.state.params && props.navigation.state.params.workout
@@ -82,8 +115,17 @@ const Page = props => {
     <Container>
       <CustomModal
         visible={modalVisible}
-        closeAction={() => setModalVisible(false)}
-      />
+        closeAction={() => setModalVisible(false)}>
+        <ModalLabel>Músculo de foco</ModalLabel>
+        <ModalMuscles horizontal={true} showsHorizontalScrollIndicator={false}>
+          <ModalMuscle opacity={modalMuscle == 'abs' ? 1 : 0.3}>
+            <ModalMuscleImg source={require('../assets/muscles/abs.png')} />
+          </ModalMuscle>
+        </ModalMuscles>
+
+        <ModalLabel>Nome do exercício</ModalLabel>
+        <ModalInput value={modalName} onChangeText={e => setModalName(e)} />
+      </CustomModal>
       <NameInput
         value={name}
         onChangeText={e => setName(e)}

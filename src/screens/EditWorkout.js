@@ -70,6 +70,17 @@ const ModalMuscleImg = styled.Image`
   height: 35px;
 `;
 
+const ModalExtra = styled.View`
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 20px;
+`;
+
+const ModalExtraItem = styled.View`
+  align-items: center;
+`;
+
 const Page = props => {
   let workout =
     props.navigation.state.params && props.navigation.state.params.workout
@@ -118,13 +129,104 @@ const Page = props => {
         closeAction={() => setModalVisible(false)}>
         <ModalLabel>Músculo de foco</ModalLabel>
         <ModalMuscles horizontal={true} showsHorizontalScrollIndicator={false}>
-          <ModalMuscle opacity={modalMuscle == 'abs' ? 1 : 0.3}>
+          <ModalMuscle
+            opacity={modalMuscle == 'abs' ? 1 : 0.3}
+            onPress={() => setModalMuscle('abs')}
+            underlayColor="transparent">
             <ModalMuscleImg source={require('../assets/muscles/abs.png')} />
+          </ModalMuscle>
+
+          <ModalMuscle
+            opacity={modalMuscle == 'back' ? 1 : 0.3}
+            onPress={() => setModalMuscle('back')}
+            underlayColor="transparent">
+            <ModalMuscleImg source={require('../assets/muscles/back.png')} />
+          </ModalMuscle>
+
+          <ModalMuscle
+            opacity={modalMuscle == 'biceps' ? 1 : 0.3}
+            onPress={() => setModalMuscle('biceps')}
+            underlayColor="transparent">
+            <ModalMuscleImg source={require('../assets/muscles/biceps.png')} />
+          </ModalMuscle>
+
+          <ModalMuscle
+            opacity={modalMuscle == 'chest' ? 1 : 0.3}
+            onPress={() => setModalMuscle('chest')}
+            underlayColor="transparent">
+            <ModalMuscleImg source={require('../assets/muscles/chest.png')} />
+          </ModalMuscle>
+
+          <ModalMuscle
+            opacity={modalMuscle == 'gluteos' ? 1 : 0.3}
+            onPress={() => setModalMuscle('gluteos')}
+            underlayColor="transparent">
+            <ModalMuscleImg source={require('../assets/muscles/gluteos.png')} />
+          </ModalMuscle>
+
+          <ModalMuscle
+            opacity={modalMuscle == 'legs' ? 1 : 0.3}
+            onPress={() => setModalMuscle('legs')}
+            underlayColor="transparent">
+            <ModalMuscleImg source={require('../assets/muscles/legs.png')} />
+          </ModalMuscle>
+
+          <ModalMuscle
+            opacity={modalMuscle == 'shoulders' ? 1 : 0.3}
+            onPress={() => setModalMuscle('shoulders')}
+            underlayColor="transparent">
+            <ModalMuscleImg
+              source={require('../assets/muscles/shoulders.png')}
+            />
+          </ModalMuscle>
+
+          <ModalMuscle
+            opacity={modalMuscle == 'triceps' ? 1 : 0.3}
+            onPress={() => setModalMuscle('triceps')}
+            underlayColor="transparent">
+            <ModalMuscleImg source={require('../assets/muscles/triceps.png')} />
           </ModalMuscle>
         </ModalMuscles>
 
         <ModalLabel>Nome do exercício</ModalLabel>
-        <ModalInput value={modalName} onChangeText={e => setModalName(e)} />
+        <ModalInput
+          value={modalName}
+          onChangeText={e => setModalName(e)}
+          keyboardType="numeric"
+        />
+
+        <ModalExtra>
+          <ModalExtraItem>
+            <ModalLabel>Séries</ModalLabel>
+            <ModalInput
+              value={modalSets}
+              onChangeText={e => setModalSets(e)}
+              keyboardType="numeric"
+            />
+          </ModalExtraItem>
+
+          <ModalExtraItem>
+            <ModalLabel>Repetições</ModalLabel>
+            <ModalInput
+              value={modalReps}
+              onChangeText={e => setModalReps(e)}
+              keyboardType="numeric"
+            />
+          </ModalExtraItem>
+
+          <ModalExtraItem>
+            <ModalLabel>Carga</ModalLabel>
+            <ModalInput
+              value={modalLoad}
+              onChangeText={e => setModalLoad(e)}
+              keyboardType="numeric"
+            />
+          </ModalExtraItem>
+        </ModalExtra>
+
+        <DefaultButton bgColor="#4ac34e">
+          <ButtonText>Salvar</ButtonText>
+        </DefaultButton>
       </CustomModal>
       <NameInput
         value={name}

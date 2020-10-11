@@ -29,7 +29,7 @@ const ModalBody = styled.View``;
 export default props => {
   return (
     <Modal visible={props.visible} transparent={true} animationType="fade">
-      <ModalBoxArea>
+      <ModalBoxArea behavior={null}>
         <ModalBox>
           <ModalClose onPress={props.closeAction} underlayColor="transparent">
             <CloseText>X</CloseText>

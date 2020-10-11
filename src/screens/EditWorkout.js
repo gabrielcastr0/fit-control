@@ -47,6 +47,21 @@ const Page = props => {
 
   const [exercises, setExercises] = useState(workout ? workout.exercises : []);
 
+  //responsável por editar exercícios
+  const editExercise = exercise => {
+    alert('EDITAR');
+  };
+
+  //responsável por deletar exercícios
+  const delExercise = exercise => {
+    let newExercises = [...exercises];
+
+    //deletando exercício
+    newExercises = newExercises.filter(i => i.id !== exercise.id);
+
+    setExercises(newExercises);
+  };
+
   return (
     <Container>
       <NameInput
@@ -61,7 +76,13 @@ const Page = props => {
 
         <ExercisesList
           data={exercises}
-          renderItem={({item}) => <ExercisesItemEdit data={item} />}
+          renderItem={({item}) => (
+            <ExercisesItemEdit
+              data={item}
+              editAction={() => editExercise(item)}
+              delAction={() => delExercise(item)}
+            />
+          )}
           keyExtractor={item => item.name}
         />
       </ExercisesArea>
@@ -86,6 +107,7 @@ Page.navigationOptions = ({navigation}) => {
     height: 25px;
   `;
 
+  //responsável por salvar treinos adicionados/editados
   const SaveWorkoutButton = () => {
     return (
       <SaveArea>

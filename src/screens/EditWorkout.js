@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components/native';
 import {connect} from 'react-redux';
 import Workout from '../components/Workout';
@@ -102,6 +102,18 @@ const Page = props => {
   const [modalSets, setModalSets] = useState('');
   const [modalReps, setModalReps] = useState('');
   const [modalLoad, setModalLoad] = useState('');
+
+  useEffect(() => {
+    props.navigation.setParams({
+      workout: {
+        id,
+        name,
+        exercises,
+      },
+      addWorkout: props.addWorkout,
+      editWorkout: props.editWorkout,
+    });
+  }, [name, exercises]);
 
   //responsável por editar exercícios
   const editExercise = exercise => {
@@ -314,7 +326,9 @@ const Page = props => {
 //configurando os botões do header da tela
 Page.navigationOptions = ({navigation}) => {
   let isEdit =
-    navigation.state.params && navigation.state.params.workout ? true : false;
+    navigation.state.params && navigation.state.params.workout.id
+      ? true
+      : false;
 
   const SaveArea = styled.TouchableHighlight`
     width: 30px;
@@ -330,8 +344,27 @@ Page.navigationOptions = ({navigation}) => {
 
   //responsável por salvar treinos adicionados/editados
   const SaveWorkoutButton = () => {
+    const handleSave = () => {
+      if (navigation.state.params && navigation.state.params.workout) {
+        let workout = navigation.state.params.workout;
+
+        if (workout.exercises.length > 0) {
+          if (workout.id !== '') {
+            navigation.state.params.editWorkout(workout);
+          } else {
+            workout.id = uuid();
+            navigation.state.params.addWorkout(workout);
+          }
+
+          navigation.goBack();
+        } else {
+          alert('Você precisa ter pelo menos 1 exercício');
+        }
+      }
+    };
+
     return (
-      <SaveArea>
+      <SaveArea onPress={handleSave}>
         <SaveImage source={require('../assets/check-black.png')} />
       </SaveArea>
     );
@@ -352,7 +385,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   //responsável por alterar os dados
-  return {};
+  return {
+    addWorkout: workout => dispatch({type: 'ADD_WORKOUT', payload: {workout}}),
+    editWorkout: workout =>
+      dispatch({type: 'EDIT_WORKOUT', payload: {workout}}),
+  };
 };
 
 export default connect(

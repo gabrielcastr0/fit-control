@@ -28,6 +28,13 @@ export default (state = initialState, action) => {
       }
       return {...state, myWorkouts};
 
+    case 'EDIT_WORKOUT':
+      let index = myWorkouts.findIndex(i => i.id === action.payload.workout.id);
+      if (index > -1) {
+        myWorkouts[index] = action.payload.workout;
+      }
+      return {...state, myWorkouts};
+
     case 'DEL_WORKOUT': //deletando workout
       myWorkouts = myWorkouts.filter(i => i.id !== action.payload.workout.id);
       return {...state, myWorkouts};

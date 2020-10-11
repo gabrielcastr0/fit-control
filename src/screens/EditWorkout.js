@@ -6,6 +6,7 @@ import Workout from '../components/Workout';
 
 import DefaultButton from '../components/DefaultButton';
 import ExercisesItemEdit from '../components/ExercisesItemEdit';
+import CustomModal from '../components/CustomModal';
 
 const Container = styled.SafeAreaView`
   flex: 1;
@@ -47,9 +48,24 @@ const Page = props => {
 
   const [exercises, setExercises] = useState(workout ? workout.exercises : []);
 
+  //propriedades do modal
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalId, setModalId] = useState('');
+  const [modalName, setModalName] = useState('');
+  const [modalMuscle, setModalMuscle] = useState('');
+  const [modalSets, setModalSets] = useState('');
+  const [modalReps, setModalReps] = useState('');
+  const [modalLoad, setModalLoad] = useState('');
+
   //responsável por editar exercícios
   const editExercise = exercise => {
-    alert('EDITAR');
+    setModalId(exercise.id);
+    setModalName(exercise.name);
+    setModalMuscle(exercise.muscle);
+    setModalSets(exercise.sets);
+    setModalReps(exercise.reps);
+    setModalLoad(exercise.load);
+    setModalVisible(true);
   };
 
   //responsável por deletar exercícios
@@ -64,6 +80,10 @@ const Page = props => {
 
   return (
     <Container>
+      <CustomModal
+        visible={modalVisible}
+        closeAction={() => setModalVisible(false)}
+      />
       <NameInput
         value={name}
         onChangeText={e => setName(e)}

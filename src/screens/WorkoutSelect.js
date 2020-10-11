@@ -9,15 +9,23 @@ import {HeaderBackButton} from 'react-navigation-stack';
 
 const Container = styled.SafeAreaView`
   flex: 1;
-  margin: 0 30px;
+  margin: 20px;
 `;
 
 const WorkoutList = styled.FlatList`
   flex: 1;
-  padding: 20px;
+`;
+
+const Title = styled.Text`
+  margin-bottom: 10px;
 `;
 
 const Page = props => {
+  let lastWorkout = false;
+  if (props.lastWorkout) {
+    lastWorkout = props.myWorkouts.find(i => i.id === props.lastWorkout);
+  }
+
   //responsável por iniciar treino
   const goWorkout = workout => {
     props.navigation.navigate('WorkoutChecklist', {workout});
@@ -25,6 +33,14 @@ const Page = props => {
 
   return (
     <Container>
+      {lastWorkout && (
+        <>
+          <Title>Seu último treino foi:</Title>
+          <Workout data={lastWorkout} />
+        </>
+      )}
+
+      <Title>Escolhe seu treino de hoje:</Title>
       <WorkoutList
         data={props.myWorkouts}
         renderItem={({item}) => (
@@ -55,6 +71,7 @@ Page.navigationOptions = ({navigation}) => {
 const mapStateToProps = state => {
   return {
     myWorkouts: state.userReducer.myWorkouts,
+    lastWorkout: state.userReducer.lastWorkout,
   };
 };
 

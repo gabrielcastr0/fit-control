@@ -8,6 +8,8 @@ import DefaultButton from '../components/DefaultButton';
 import ExercisesItemEdit from '../components/ExercisesItemEdit';
 import CustomModal from '../components/CustomModal';
 
+import uuid from 'uuid/v4';
+
 const Container = styled.SafeAreaView`
   flex: 1;
   margin: 20px;
@@ -122,6 +124,59 @@ const Page = props => {
     setExercises(newExercises);
   };
 
+  //responsável por salvar as alterações no modal
+  const modalSave = () => {
+    let newExercises = [...exercises];
+
+    if (
+      modalName === '' ||
+      modalMuscle === '' ||
+      modalSets === '' ||
+      modalReps === ''
+    ) {
+      alert('Preencha todas as informações!');
+      return;
+    }
+
+    if (modalId) {
+      let index = newExercises.findIndex(i => i.id === modalId);
+      if (index > -1) {
+        newExercises[index].name = modalName;
+        newExercises[index].muscle = modalMuscle;
+        newExercises[index].sets = modalSets;
+        newExercises[index].reps = modalReps;
+        newExercises[index].load = modalLoad;
+      }
+    } else {
+      let ex = {
+        id: uuid(),
+        name: modalName,
+        muscle: modalMuscle,
+        sets: modalSets,
+        reps: modalReps,
+        load: modalLoad,
+      };
+      newExercises.push(ex);
+    }
+
+    setExercises(newExercises);
+    setModalVisible(false);
+  };
+
+  //responsável por resetar as infos do modal
+  const resetModal = () => {
+    setModalId('');
+    setModalMuscle('');
+    setModalSets('');
+    setModalReps('');
+    setModalLoad('');
+  };
+
+  const addExercise = () => {
+    resetModal();
+    setModalVisible(true);
+  };
+
   return (
     <Container>
       <CustomModal
@@ -189,11 +244,7 @@ const Page = props => {
         </ModalMuscles>
 
         <ModalLabel>Nome do exercício</ModalLabel>
-        <ModalInput
-          value={modalName}
-          onChangeText={e => setModalName(e)}
-          keyboardType="numeric"
-        />
+        <ModalInput value={modalName} onChangeText={e => setModalName(e)} />
 
         <ModalExtra>
           <ModalExtraItem>
@@ -224,7 +275,10 @@ const Page = props => {
           </ModalExtraItem>
         </ModalExtra>
 
-        <DefaultButton bgColor="#4ac34e">
+        <DefaultButton
+          bgColor="#4ac34e"
+          onPress={modalSave}
+          underlayColor="transparent">
           <ButtonText>Salvar</ButtonText>
         </DefaultButton>
       </CustomModal>
@@ -234,7 +288,10 @@ const Page = props => {
         placeholder="Digite o nome do treino"
       />
       <ExercisesArea>
-        <DefaultButton bgColor="#4ac3ae">
+        <DefaultButton
+          bgColor="#4ac3ae"
+          onPress={addExercise}
+          underlayColor="#4ac3ae">
           <ButtonText>Adicionar Exercício</ButtonText>
         </DefaultButton>
 

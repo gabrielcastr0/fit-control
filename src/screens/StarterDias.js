@@ -10,8 +10,8 @@ const Container = styled.SafeAreaView`
   flex: 1;
   align-items: center;
   background-color: #fff;
-  margin-left: 30px;
-  margin-right: 30px;
+  margin-left: 20px;
+  margin-right: 20px;
   margin-top: 50px;
 `;
 

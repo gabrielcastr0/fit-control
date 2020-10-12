@@ -6,7 +6,6 @@ import Workout from '../components/Workout';
 
 const Container = styled.SafeAreaView`
   flex: 1;
-  margin: 0 30px;
 `;
 
 const WorkoutList = styled.FlatList`

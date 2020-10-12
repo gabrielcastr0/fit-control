@@ -288,10 +288,10 @@ const Page = props => {
         </ModalExtra>
 
         <DefaultButton
-          bgColor="#4ac34e"
+          bgColor="#0072c0"
           onPress={modalSave}
           underlayColor="transparent">
-          <ButtonText>Salvar</ButtonText>
+          <ButtonText style={{color: '#fff'}}>Salvar</ButtonText>
         </DefaultButton>
       </CustomModal>
       <NameInput
@@ -301,10 +301,10 @@ const Page = props => {
       />
       <ExercisesArea>
         <DefaultButton
-          bgColor="#4ac3ae"
+          bgColor="#0072c0"
           onPress={addExercise}
-          underlayColor="#4ac3ae">
-          <ButtonText>Adicionar Exercício</ButtonText>
+          underlayColor="#0072c0">
+          <ButtonText style={{color: '#fff'}}>Adicionar Exercício</ButtonText>
         </DefaultButton>
 
         <ExercisesList

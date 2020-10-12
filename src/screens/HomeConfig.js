@@ -92,58 +92,79 @@ const Page = props => {
       <ListArea>
         <DayItem
           style={
-            props.workoutDays.includes(1) ? {backgroundColor: '#ff0000'} : {}
+            props.workoutDays.includes(1) ? {backgroundColor: '#0072c0'} : {}
           }
           onPress={() => toggleWorkoutDay(1)}>
-          <DayItemText>S</DayItemText>
+          <DayItemText
+            style={{color: props.workoutDays.includes(1) ? '#fff' : '#000'}}>
+            S
+          </DayItemText>
         </DayItem>
 
         <DayItem
           style={
-            props.workoutDays.includes(2) ? {backgroundColor: '#ff0000'} : {}
+            props.workoutDays.includes(2) ? {backgroundColor: '#0072c0'} : {}
           }
           onPress={() => toggleWorkoutDay(2)}>
-          <DayItemText>T</DayItemText>
+          <DayItemText
+            style={{color: props.workoutDays.includes(2) ? '#fff' : '#000'}}>
+            T
+          </DayItemText>
         </DayItem>
 
         <DayItem
           style={
-            props.workoutDays.includes(3) ? {backgroundColor: '#ff0000'} : {}
+            props.workoutDays.includes(3) ? {backgroundColor: '#0072c0'} : {}
           }
           onPress={() => toggleWorkoutDay(3)}>
-          <DayItemText>Q</DayItemText>
+          <DayItemText
+            style={{color: props.workoutDays.includes(3) ? '#fff' : '#000'}}>
+            Q
+          </DayItemText>
         </DayItem>
 
         <DayItem
           style={
-            props.workoutDays.includes(4) ? {backgroundColor: '#ff0000'} : {}
+            props.workoutDays.includes(4) ? {backgroundColor: '#0072c0'} : {}
           }
           onPress={() => toggleWorkoutDay(4)}>
-          <DayItemText>Q</DayItemText>
+          <DayItemText
+            style={{color: props.workoutDays.includes(4) ? '#fff' : '#000'}}>
+            Q
+          </DayItemText>
         </DayItem>
 
         <DayItem
           style={
-            props.workoutDays.includes(5) ? {backgroundColor: '#ff0000'} : {}
+            props.workoutDays.includes(5) ? {backgroundColor: '#0072c0'} : {}
           }
           onPress={() => toggleWorkoutDay(5)}>
-          <DayItemText>S</DayItemText>
+          <DayItemText
+            style={{color: props.workoutDays.includes(5) ? '#fff' : '#000'}}>
+            S
+          </DayItemText>
         </DayItem>
 
         <DayItem
           style={
-            props.workoutDays.includes(6) ? {backgroundColor: '#ff0000'} : {}
+            props.workoutDays.includes(6) ? {backgroundColor: '#0072c0'} : {}
           }
           onPress={() => toggleWorkoutDay(6)}>
-          <DayItemText>S</DayItemText>
+          <DayItemText
+            style={{color: props.workoutDays.includes(6) ? '#fff' : '#000'}}>
+            S
+          </DayItemText>
         </DayItem>
 
         <DayItem
           style={
-            props.workoutDays.includes(0) ? {backgroundColor: '#ff0000'} : {}
+            props.workoutDays.includes(0) ? {backgroundColor: '#0072c0'} : {}
           }
           onPress={() => toggleWorkoutDay(0)}>
-          <DayItemText>D</DayItemText>
+          <DayItemText
+            style={{color: props.workoutDays.includes(0) ? '#fff' : '#000'}}>
+            D
+          </DayItemText>
         </DayItem>
       </ListArea>
 
@@ -151,27 +172,36 @@ const Page = props => {
       <ListArea>
         <LevelItem
           style={
-            props.level === 'iniciante' ? {backgroundColor: '#ff0000'} : {}
+            props.level === 'iniciante' ? {backgroundColor: '#0072c0'} : {}
           }
           onPress={() => props.setLevel('iniciante')}
           underlayColor="transparent">
-          <LevelItemText>Iniciante</LevelItemText>
+          <LevelItemText
+            style={{color: props.level === 'iniciante' ? '#fff' : '#000'}}>
+            Iniciante
+          </LevelItemText>
         </LevelItem>
 
         <LevelItem
           style={
-            props.level === 'intermediário' ? {backgroundColor: '#ff0000'} : {}
+            props.level === 'intermediário' ? {backgroundColor: '#0072c0'} : {}
           }
           onPress={() => props.setLevel('intermediário')}
           underlayColor="transparent">
-          <LevelItemText>Intermediário</LevelItemText>
+          <LevelItemText
+            style={{color: props.level === 'intermediário' ? '#fff' : '#000'}}>
+            Intermediário
+          </LevelItemText>
         </LevelItem>
 
         <LevelItem
-          style={props.level === 'avançado' ? {backgroundColor: '#ff0000'} : {}}
+          style={props.level === 'avançado' ? {backgroundColor: '#0072c0'} : {}}
           onPress={() => props.setLevel('avançado')}
           underlayColor="transparent">
-          <LevelItemText>Avançado</LevelItemText>
+          <LevelItemText
+            style={{color: props.level === 'avançado' ? '#fff' : '#000'}}>
+            Avançado
+          </LevelItemText>
         </LevelItem>
       </ListArea>
 

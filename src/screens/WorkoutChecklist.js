@@ -57,6 +57,8 @@ const Page = props => {
 
   const [exercises, setExercises] = useState([...workout.exercises]);
 
+  const checkAction = exercise => {};
+
   return (
     <Container source={require('../assets/fitness.jpg')}>
       <StatusBar barStyle="light-content" />
@@ -71,7 +73,13 @@ const Page = props => {
         </WorkoutHeader>
         <WorkoutList
           data={exercises}
-          renderItem={({item}) => <ExerciseItem data={item} />}
+          renderItem={({item, index}) => (
+            <ExerciseItem
+              data={item}
+              index={index}
+              checkAction={() => checkAction(item)}
+            />
+          )}
           keyExtractor={item => item.id.toString()}
         />
       </SafeArea>

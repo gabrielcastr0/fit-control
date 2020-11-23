@@ -40,7 +40,7 @@ const Page = props => {
         </>
       )}
 
-      <Title>Escolhe seu treino de hoje:</Title>
+      <Title>Escolha seu treino de hoje:</Title>
       <WorkoutList
         data={props.myWorkouts}
         renderItem={({item}) => (

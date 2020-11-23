@@ -71,7 +71,7 @@ const Page = props => {
   return (
     <Container>
       <HeaderText>
-        Fala <BoldText>{firstName}</BoldText>, tudo bem?
+        Olá <BoldText>{firstName}</BoldText>, tudo bem?
       </HeaderText>
       <HeaderText>
         Quais <BoldText>dias da semana</BoldText> você pretende treinar?

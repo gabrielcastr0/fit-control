@@ -142,7 +142,7 @@ export default props => {
           month={props.selectedMonth}
           dailyProgress={props.dailyProgress}
           workoutDays={props.workoutDays}
-          onPress={() => scrollToDay(d)}
+          // onPress={() => scrollToDay(d)}
         />
       ))}
     </DaysScroll>
